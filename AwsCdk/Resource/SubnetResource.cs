@@ -4,7 +4,7 @@ using Amazon.CDK.AWS.EC2;
 
 namespace AwsCdk.Resource
 {
-    internal class SubnetResource
+    internal class SubnetResource : AbhstractResource
     {
         public CfnSubnet SubnetPublic1a { get; private set; }
         public CfnSubnet SubnetPublic1c { get; private set; }
@@ -20,10 +20,8 @@ namespace AwsCdk.Resource
             this.vpcRes = vpcRes;
         }
 
-        public void CreateResources(Construct scope)
+        internal override void CreateResources(Construct scope)
         {
-            var systemName = scope.Node.TryGetContext("systemName");
-            var envType = scope.Node.TryGetContext("envType");
             SubnetPublic1a = new CfnSubnet(scope, "SubnetPublic1a", new CfnSubnetProps
             {
                 CidrBlock = "10.0.11.0/24",
@@ -32,7 +30,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-public-1a"
+                        Value= CreateResourceName(scope, "subnet-public-1a")
                     }
                 }
             });
@@ -44,7 +42,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-public-1c"
+                        Value=CreateResourceName(scope, "subnet-public-1c")
                     }
                 }
             });
@@ -56,7 +54,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-app-1a"
+                        Value=CreateResourceName(scope, "subnet-app-1a")
                     }
                 }
             });
@@ -68,7 +66,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-app-1c"
+                        Value=CreateResourceName(scope, "subnet-app-1c")
                     }
                 }
             });
@@ -80,7 +78,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-db-1a"
+                        Value=CreateResourceName(scope, "subnet-db-1a")
                     }
                 }
             });
@@ -92,7 +90,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=$"{systemName}-{envType}-subnet-db-1c"
+                        Value=CreateResourceName(scope, "subnet-db-1c")
                     }
                 }
             });
