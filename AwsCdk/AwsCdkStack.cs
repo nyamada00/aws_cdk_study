@@ -8,8 +8,8 @@ namespace AwsCdk
     {
         internal AwsCdkStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
-            var systemName=this.Node.TryGetContext("systemName");
-            var envType=this.Node.TryGetContext("envType");
+            var systemName = this.Node.TryGetContext("systemName");
+            var envType = this.Node.TryGetContext("envType");
 
             new CfnVPC(this, "Vpc", new CfnVPCProps
             {

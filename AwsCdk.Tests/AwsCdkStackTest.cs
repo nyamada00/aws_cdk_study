@@ -12,11 +12,14 @@ namespace AwsCdk.Tests
         [Fact]
         public void VpcTest()
         {
+            const string SYSTEM_NAME = "awscdk_study";
+            const string ENV_TYPE = "test";
+
             var app = new App(new AppProps
             {
                 Context = new Dictionary<string, object>{
-                    {"systemName","awscdk_study"},
-                    {"envType", "test"}
+                    {"systemName",SYSTEM_NAME},
+                    {"envType", ENV_TYPE}
                 }
             });
             var stack = new AwsCdkStack(app, "AwsCdkStack", new StackProps
@@ -37,7 +40,7 @@ namespace AwsCdk.Tests
             template.HasResourceProperties("AWS::EC2::VPC", new Dictionary<string, object>{
                 { "Tags",new  []
                     {
-                        new Dictionary<string, object> { { "Key", "Name" }, { "Value", "awscdk_study-test-vpc" } }
+                        new Dictionary<string, object> { { "Key", "Name" }, { "Value", $"{SYSTEM_NAME}-{ENV_TYPE}-vpc" } }
                     }
                 }
             });

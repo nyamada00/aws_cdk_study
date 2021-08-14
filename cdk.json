@@ -14,7 +14,7 @@
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
     "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
-    "systemName" :"awscdk",
-    "envType":"com"
+    "systemName": "awscdk",
+    "envType": "com"
   }
 }

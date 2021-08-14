@@ -18,7 +18,7 @@ namespace AwsCdk
 
                 // Uncomment the next block to specialize this stack for the AWS Account
                 // and Region that are implied by the current CLI configuration.
-                
+
                 Env = new Amazon.CDK.Environment
                 {
                     Account = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_ACCOUNT"),
