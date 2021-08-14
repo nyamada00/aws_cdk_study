@@ -1,18 +1,13 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 
-
 namespace AwsCdk.Resource
 {
-    internal class VpcResource : AbhstractResource
+    internal class VpcResource : AbstractResource
     {
-        public CfnVPC Vpc { get; private set; }
+        internal CfnVPC Vpc { get; private set; }
 
-        public VpcResource()
-        {
-
-        }
-
+        /// <inheritdoc/>
         internal override void CreateResources(Construct scope)
         {
             Vpc = new CfnVPC(scope, "Vpc", new CfnVPCProps

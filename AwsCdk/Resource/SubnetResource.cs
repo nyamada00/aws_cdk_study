@@ -1,96 +1,120 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
+using System;
+using System.Collections.ObjectModel;
 
 
 namespace AwsCdk.Resource
 {
-    internal class SubnetResource : AbhstractResource
+    internal class SubnetResource : AbstractResource
     {
-        public CfnSubnet SubnetPublic1a { get; private set; }
-        public CfnSubnet SubnetPublic1c { get; private set; }
-        public CfnSubnet SubnetApp1a { get; private set; }
-        public CfnSubnet SubnetApp1c { get; private set; }
-        public CfnSubnet SubnetDb1a { get; private set; }
-        public CfnSubnet SubnetDb1c { get; private set; }
-
-        private VpcResource vpcRes;
-
-        public SubnetResource(VpcResource vpcRes)
+        private readonly struct ResourceInfo
         {
-            this.vpcRes = vpcRes;
+            public string Id { get; }
+            public string CidrBlock { get; }
+            public string AvailabilityZone { get; }
+            public string ResourceName { get; }
+
+            public Action<CfnSubnet> Assign { get; }
+
+            public ResourceInfo(string id, string cidrBlock, string availabilityZone, string resourceName, Action<CfnSubnet> assign)
+            => (Id, CidrBlock, AvailabilityZone, ResourceName, Assign) = (id, cidrBlock, availabilityZone, resourceName, assign);
         }
 
+        internal CfnSubnet SubnetPublic1a { get; private set; }
+        internal CfnSubnet SubnetPublic1c { get; private set; }
+        internal CfnSubnet SubnetApp1a { get; private set; }
+        internal CfnSubnet SubnetApp1c { get; private set; }
+        internal CfnSubnet SubnetDb1a { get; private set; }
+        internal CfnSubnet SubnetDb1c { get; private set; }
+
+        private readonly VpcResource vpcRes;
+
+        private ReadOnlyCollection<ResourceInfo> resourceInfoList;
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="vpcRes">VPC</param>
+        public SubnetResource(VpcResource vpcRes) : base()
+        {
+            this.vpcRes = vpcRes;
+
+            var resourcesInfo = new[]{
+                new ResourceInfo(
+                    "SubnetPublic1a",
+                    "10.0.11.0/24",
+                    "ap-northeast-1a",
+                    "subnet-public-1a",
+                    subnet =>SubnetPublic1a=subnet
+                ),
+                new ResourceInfo(
+                    "SubnetPublic1c",
+                    "10.0.12.0/24",
+                    "ap-northeast-1c",
+                    "subnet-public-1c",
+                    subnet =>SubnetPublic1c=subnet
+                ),
+                new ResourceInfo(
+                    "SubnetApp1a",
+                    "10.0.21.0/24",
+                    "ap-northeast-1a",
+                    "subnet-app-1a",
+                    subnet =>SubnetApp1a=subnet
+                ),
+                new ResourceInfo(
+                    "SubnetApp1c",
+                    "10.0.22.0/24",
+                    "ap-northeast-1c",
+                    "subnet-app-1c",
+                    subnet =>SubnetApp1c=subnet
+                ),
+                new ResourceInfo(
+                    "SubnetDb1a",
+                    "10.0.31.0/24",
+                    "ap-northeast-1a",
+                    "subnet-db-1a",
+                    subnet =>SubnetDb1a=subnet
+                ),
+                new ResourceInfo(
+                    "SubnetDb1c",
+                    "10.0.32.0/24",
+                    "ap-northeast-1c",
+                    "subnet-db-1c",
+                    subnet =>SubnetDb1c=subnet
+                ),
+            };
+
+            resourceInfoList = new ReadOnlyCollection<ResourceInfo>(resourcesInfo);
+        }
+
+        /// <inheritdoc/>
         internal override void CreateResources(Construct scope)
         {
-            SubnetPublic1a = new CfnSubnet(scope, "SubnetPublic1a", new CfnSubnetProps
+            foreach (var resourceInfo in resourceInfoList)
             {
-                CidrBlock = "10.0.11.0/24",
+                var subnet = createSubnet(scope, resourceInfo);
+                resourceInfo.Assign(subnet);
+            }
+        }
+
+        /// <summary>
+        /// サブネット作成
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="resourcesInfo"></param>
+        /// <returns></returns>
+        private CfnSubnet createSubnet(Construct scope, ResourceInfo resourcesInfo)
+        {
+            return new CfnSubnet(scope, resourcesInfo.ResourceName, new CfnSubnetProps
+            {
+                CidrBlock = resourcesInfo.CidrBlock,
                 VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1a",
+                AvailabilityZone = resourcesInfo.AvailabilityZone,
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value= CreateResourceName(scope, "subnet-public-1a")
-                    }
-                }
-            });
-            var subnetPublic1c = new CfnSubnet(scope, "SubnetPublic1c", new CfnSubnetProps
-            {
-                CidrBlock = "10.0.12.0/24",
-                VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1c",
-                Tags = new[]{
-                    new CfnTag{
-                        Key="Name",
-                        Value=CreateResourceName(scope, "subnet-public-1c")
-                    }
-                }
-            });
-            var subnetApp1a = new CfnSubnet(scope, "SubnetApp1a", new CfnSubnetProps
-            {
-                CidrBlock = "10.0.21.0/24",
-                VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1a",
-                Tags = new[]{
-                    new CfnTag{
-                        Key="Name",
-                        Value=CreateResourceName(scope, "subnet-app-1a")
-                    }
-                }
-            });
-            var subnetApp1c = new CfnSubnet(scope, "SubnetApp1c", new CfnSubnetProps
-            {
-                CidrBlock = "10.0.22.0/24",
-                VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1c",
-                Tags = new[]{
-                    new CfnTag{
-                        Key="Name",
-                        Value=CreateResourceName(scope, "subnet-app-1c")
-                    }
-                }
-            });
-            var subnetDb1a = new CfnSubnet(scope, "SubnetDb1a", new CfnSubnetProps
-            {
-                CidrBlock = "10.0.31.0/24",
-                VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1a",
-                Tags = new[]{
-                    new CfnTag{
-                        Key="Name",
-                        Value=CreateResourceName(scope, "subnet-db-1a")
-                    }
-                }
-            });
-            var subnetDb1c = new CfnSubnet(scope, "SubnetDb1c", new CfnSubnetProps
-            {
-                CidrBlock = "10.0.32.0/24",
-                VpcId = vpcRes.Vpc.Ref,
-                AvailabilityZone = "ap-northeast-1c",
-                Tags = new[]{
-                    new CfnTag{
-                        Key="Name",
-                        Value=CreateResourceName(scope, "subnet-db-1c")
+                        Value=CreateResourceName(scope, resourcesInfo.ResourceName)
                     }
                 }
             });

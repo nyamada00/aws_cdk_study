@@ -7,8 +7,8 @@ namespace AwsCdk.Tests.Resource
 {
     public class SubnetResourceTest
     {
-        const string SYSTEM_NAME = "awscdk_study";
-        const string ENV_TYPE = "test";
+        private const string SYSTEM_NAME = "awscdk_study";
+        private const string ENV_TYPE = "test";
 
         private App app;
         private Template template;
