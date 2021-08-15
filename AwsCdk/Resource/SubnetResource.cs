@@ -28,7 +28,7 @@ namespace AwsCdk.Resource
         internal CfnSubnet SubnetDb1a { get; private set; }
         internal CfnSubnet SubnetDb1c { get; private set; }
 
-        private readonly VpcResource vpcRes;
+        private readonly CfnVPC vpc;
 
         private ReadOnlyCollection<ResourceInfo> resourceInfoList;
 
@@ -36,9 +36,9 @@ namespace AwsCdk.Resource
         /// コンストラクタ
         /// </summary>
         /// <param name="vpcRes">VPC</param>
-        public SubnetResource(VpcResource vpcRes) : base()
+        public SubnetResource(CfnVPC vpc) : base()
         {
-            this.vpcRes = vpcRes;
+            this.vpc = vpc;
 
             var resourcesInfo = new[]{
                 new ResourceInfo(
@@ -109,7 +109,7 @@ namespace AwsCdk.Resource
             return new CfnSubnet(scope, resourcesInfo.ResourceName, new CfnSubnetProps
             {
                 CidrBlock = resourcesInfo.CidrBlock,
-                VpcId = vpcRes.Vpc.Ref,
+                VpcId = vpc.Ref,
                 AvailabilityZone = resourcesInfo.AvailabilityZone,
                 Tags = new[]{
                     new CfnTag{

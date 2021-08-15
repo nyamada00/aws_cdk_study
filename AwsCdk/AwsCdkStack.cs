@@ -1,5 +1,4 @@
 using Amazon.CDK;
-using Amazon.CDK.AWS.EC2;
 using AwsCdk.Resource;
 
 
@@ -12,8 +11,11 @@ namespace AwsCdk
             var vpcRes = new VpcResource();
             vpcRes.CreateResources(this);
 
-            var subnetRes = new SubnetResource(vpcRes);
+            var subnetRes = new SubnetResource(vpcRes.Vpc);
             subnetRes.CreateResources(this);
+
+            var igwRes = new IgwResource(vpcRes.Vpc);
+            igwRes.CreateResources(this);
         }
     }
 }
