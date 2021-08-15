@@ -9,7 +9,7 @@ namespace AwsCdk.Resource
 
         private readonly CfnVPC vpc;
 
-        public IgwResource(CfnVPC vpc)
+        public IgwResource(CfnVPC vpc) : base()
         {
             this.vpc = vpc;
         }

@@ -16,6 +16,9 @@ namespace AwsCdk
 
             var igwRes = new IgwResource(vpcRes.Vpc);
             igwRes.CreateResources(this);
+
+            var eipRes = new EipResource();
+            eipRes.CreateResources(this);
         }
     }
 }
