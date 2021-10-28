@@ -23,8 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AwsCdk\AwsCdk.csproj" />
-    <PackageReference Include="Amazon.CDK" Version="1.117.0" />
-    <PackageReference Include="Amazon.CDK.Assertions" Version="1.117.0" />
+    <PackageReference Include="Amazon.CDK" Version="1.129.0" />
+    <PackageReference Include="Amazon.CDK.Assertions" Version="1.129.0" />
   </ItemGroup>
 
 </Project>
