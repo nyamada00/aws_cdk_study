@@ -27,7 +27,7 @@ namespace AwsCdk.Resource
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EipResource():base()
+        public EipResource() : base()
         {
             var resourcesInfo = new[]{
                 new ResourceInfo(

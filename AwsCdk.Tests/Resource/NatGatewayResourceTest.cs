@@ -55,7 +55,7 @@ namespace AwsCdk.Tests.Resource
                     }
                 }
             });
-             template.HasResourceProperties("AWS::EC2::NatGateway", new Dictionary<string, object>{
+            template.HasResourceProperties("AWS::EC2::NatGateway", new Dictionary<string, object>{
                 { "Tags",new  [] {
                         new Dictionary<string, object> {
                             { "Key", "Name" },

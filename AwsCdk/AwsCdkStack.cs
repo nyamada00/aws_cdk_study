@@ -20,7 +20,7 @@ namespace AwsCdk
             var eipRes = new EipResource();
             eipRes.CreateResources(this);
 
-            var ngwRes = new NatGatewayResource(subnetRes.SubnetPublic1a,subnetRes.SubnetPublic1c,eipRes.Eip1a,eipRes.Eip1c);
+            var ngwRes = new NatGatewayResource(subnetRes.SubnetPublic1a, subnetRes.SubnetPublic1c, eipRes.Eip1a, eipRes.Eip1c);
             ngwRes.CreateResources(this);
         }
     }

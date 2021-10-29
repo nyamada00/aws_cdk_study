@@ -24,11 +24,11 @@ namespace AwsCdk.Resource
         internal CfnNatGateway Ngw1a { get; private set; }
         internal CfnNatGateway Ngw1c { get; private set; }
 
-        private CfnSubnet SubnetPublic1a { get;  }
-        private CfnSubnet SubnetPublic1c { get;  }
+        private CfnSubnet SubnetPublic1a { get; }
+        private CfnSubnet SubnetPublic1c { get; }
 
-        private CfnEIP EipNgw1a { get;  }
-        private CfnEIP EipNgw1c { get;  }
+        private CfnEIP EipNgw1a { get; }
+        private CfnEIP EipNgw1c { get; }
 
         private ReadOnlyCollection<ResourceInfo> resourceInfoList;
 
@@ -43,10 +43,10 @@ namespace AwsCdk.Resource
             CfnEIP eipNgw1c
         ) : base()
         {
-            this.SubnetPublic1a=subnetPublic1a;
-            this.SubnetPublic1c=subnetPublic1c;
-            this.EipNgw1a=eipNgw1a;
-            this.EipNgw1c=eipNgw1c;
+            this.SubnetPublic1a = subnetPublic1a;
+            this.SubnetPublic1c = subnetPublic1c;
+            this.EipNgw1a = eipNgw1a;
+            this.EipNgw1c = eipNgw1c;
 
             var resourcesInfo = new[]{
                 new ResourceInfo(
@@ -88,8 +88,8 @@ namespace AwsCdk.Resource
         {
             return new CfnNatGateway(scope, resourcesInfo.ResourceName, new CfnNatGatewayProps
             {
-                AllocationId=resourcesInfo.AllocationId,
-                SubnetId=resourcesInfo.SubnetId,
+                AllocationId = resourcesInfo.AllocationId,
+                SubnetId = resourcesInfo.SubnetId,
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
