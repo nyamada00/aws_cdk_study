@@ -5,7 +5,7 @@ namespace AwsCdk.Resource
 {
     internal class IgwResource : AbstractResource
     {
-        internal CfnInternetGateway Igw { get; private set; }
+        internal CfnInternetGateway? Igw { get; private set; }
 
         private readonly CfnVPC vpc;
 

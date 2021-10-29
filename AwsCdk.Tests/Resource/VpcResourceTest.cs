@@ -7,7 +7,7 @@ namespace AwsCdk.Tests.Resource
 {
     public class VpcResourceTest
     {
-        const string SYSTEM_NAME = "awscdk_study";
+        const string SYSTEM_NAME = "VpcResourceTest";
         const string ENV_TYPE = "test";
 
         private App app;
@@ -26,7 +26,7 @@ namespace AwsCdk.Tests.Resource
                 }
             });
 
-            template = Template.FromStack(new AwsCdkStack(app, "AwsCdkStack", new StackProps
+            template = Template.FromStack(new AwsCdkStack(app, "VpcResourceTestStack", new StackProps
             {
                 Env = new Environment
                 {

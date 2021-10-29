@@ -8,25 +8,14 @@ namespace AwsCdk.Resource
 {
     internal class SubnetResource : AbstractResource
     {
-        private readonly struct ResourceInfo
-        {
-            public string Id { get; }
-            public string CidrBlock { get; }
-            public string AvailabilityZone { get; }
-            public string ResourceName { get; }
+        private record ResourceInfo(string Id, string CidrBlock,string AvailabilityZone,string ResourceName,Action<CfnSubnet> Assign);
 
-            public Action<CfnSubnet> Assign { get; }
-
-            public ResourceInfo(string id, string cidrBlock, string availabilityZone, string resourceName, Action<CfnSubnet> assign)
-            => (Id, CidrBlock, AvailabilityZone, ResourceName, Assign) = (id, cidrBlock, availabilityZone, resourceName, assign);
-        }
-
-        internal CfnSubnet SubnetPublic1a { get; private set; }
-        internal CfnSubnet SubnetPublic1c { get; private set; }
-        internal CfnSubnet SubnetApp1a { get; private set; }
-        internal CfnSubnet SubnetApp1c { get; private set; }
-        internal CfnSubnet SubnetDb1a { get; private set; }
-        internal CfnSubnet SubnetDb1c { get; private set; }
+        internal CfnSubnet? SubnetPublic1a { get; private set; }
+        internal CfnSubnet? SubnetPublic1c { get; private set; }
+        internal CfnSubnet? SubnetApp1a { get; private set; }
+        internal CfnSubnet? SubnetApp1c { get; private set; }
+        internal CfnSubnet? SubnetDb1a { get; private set; }
+        internal CfnSubnet? SubnetDb1c { get; private set; }
 
         private readonly CfnVPC vpc;
 

@@ -7,7 +7,7 @@ namespace AwsCdk.Tests.Resource
 {
     public class NatGatewayResourceTest
     {
-        private const string SYSTEM_NAME = "awscdk_study";
+        private const string SYSTEM_NAME = "NatGatewayResourceTest";
         private const string ENV_TYPE = "test";
 
         private App app;
@@ -26,7 +26,7 @@ namespace AwsCdk.Tests.Resource
                 }
             });
 
-            template = Template.FromStack(new AwsCdkStack(app, "AwsCdkStack", new StackProps
+            template = Template.FromStack(new AwsCdkStack(app, "NatGatewayResourceTestStack", new StackProps
             {
                 Env = new Environment
                 {

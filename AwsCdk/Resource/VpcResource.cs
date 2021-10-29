@@ -5,7 +5,7 @@ namespace AwsCdk.Resource
 {
     internal class VpcResource : AbstractResource
     {
-        internal CfnVPC Vpc { get; private set; }
+        internal CfnVPC? Vpc { get; private set; }
 
         /// <inheritdoc/>
         internal override void CreateResources(Construct scope)

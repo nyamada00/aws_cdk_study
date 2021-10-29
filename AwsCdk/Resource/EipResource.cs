@@ -8,19 +8,10 @@ namespace AwsCdk.Resource
 {
     internal class EipResource : AbstractResource
     {
-        private readonly struct ResourceInfo
-        {
-            public string Id { get; }
-            public string ResourceName { get; }
+        private record ResourceInfo(string Id,string ResourceName,Action<CfnEIP> Assign);
 
-            public Action<CfnEIP> Assign { get; }
-
-            public ResourceInfo(string id, string resourceName, Action<CfnEIP> assign)
-            => (Id, ResourceName, Assign) = (id, resourceName, assign);
-        }
-
-        internal CfnEIP Eip1a { get; private set; }
-        internal CfnEIP Eip1c { get; private set; }
+        internal CfnEIP? Eip1a { get; private set; }
+        internal CfnEIP? Eip1c { get; private set; }
 
         private ReadOnlyCollection<ResourceInfo> resourceInfoList;
 

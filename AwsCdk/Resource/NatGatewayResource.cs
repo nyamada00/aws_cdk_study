@@ -8,21 +8,10 @@ namespace AwsCdk.Resource
 {
     internal class NatGatewayResource : AbstractResource
     {
-        private readonly struct ResourceInfo
-        {
-            public string Id { get; }
-            public string AllocationId { get; }
-            public string SubnetId { get; }
-            public string ResourceName { get; }
+        private record ResourceInfo(string Id,string AllocationId,string SubnetId,string ResourceName,Action<CfnNatGateway> Assign);
 
-            public Action<CfnNatGateway> Assign { get; }
-
-            public ResourceInfo(string id, string allocationId, string subnetId, string resourceName, Action<CfnNatGateway> assign)
-            => (Id, AllocationId, SubnetId, ResourceName, Assign) = (id, allocationId, subnetId, resourceName, assign);
-        }
-
-        internal CfnNatGateway Ngw1a { get; private set; }
-        internal CfnNatGateway Ngw1c { get; private set; }
+        internal CfnNatGateway? Ngw1a { get; private set; }
+        internal CfnNatGateway? Ngw1c { get; private set; }
 
         private CfnSubnet SubnetPublic1a { get; }
         private CfnSubnet SubnetPublic1c { get; }
