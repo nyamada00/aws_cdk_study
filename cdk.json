@@ -1,5 +1,5 @@
 {
-  "app": "dotnet run -p AwsCdk/AwsCdk.csproj",
+  "app": "dotnet run --project AwsCdk/AwsCdk.csproj",
   "versionReporting": false,
   "context": {
     "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
