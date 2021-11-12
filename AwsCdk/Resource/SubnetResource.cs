@@ -8,7 +8,7 @@ namespace AwsCdk.Resource
 {
     internal class SubnetResource : AbstractResource
     {
-        private record ResourceInfo(string Id, string CidrBlock,string AvailabilityZone,string ResourceName,Action<CfnSubnet> Assign);
+        private record ResourceInfo(string Id, string CidrBlock, string AvailabilityZone, string ResourceName, Action<CfnSubnet> Assign);
 
         internal CfnSubnet? SubnetPublic1a { get; private set; }
         internal CfnSubnet? SubnetPublic1c { get; private set; }
