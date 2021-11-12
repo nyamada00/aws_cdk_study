@@ -13,7 +13,6 @@ namespace AwsCdk.Tests
         [Fact]
         public void IgwTest()
         {
-            // VPC
             template.ResourceCountIs("AWS::EC2::InternetGateway", 1);
             template.HasResourceProperties("AWS::EC2::InternetGateway", new Dictionary<string, object>{
                 { "Tags",new  []{

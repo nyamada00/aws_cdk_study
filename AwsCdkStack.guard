@@ -1,0 +1,54 @@
+let aws_ec2_vpc_resources = Resources.*[ Type == 'AWS::EC2::VPC' ]
+rule aws_ec2_vpc when %aws_ec2_vpc_resources !empty {
+  %aws_ec2_vpc_resources.Properties.Tags == [{"Key":"Name","Value":"awscdk-com-vpc"}]
+  %aws_ec2_vpc_resources.Properties.CidrBlock == "10.0.0.0/16"
+}
+let aws_ec2_routetable_resources = Resources.*[ Type == 'AWS::EC2::RouteTable' ]
+rule aws_ec2_routetable when %aws_ec2_routetable_resources !empty {
+  %aws_ec2_routetable_resources.Properties.Tags IN [[{"Key":"Name","Value":"awscdk-com-rtb-db"}], [{"Key":"Name","Value":"awscdk-com-rtb-app-1a"}], [{"Key":"Name","Value":"awscdk-com-rtb-public"}], [{"Key":"Name","Value":"awscdk-com-rtb-app-1c"}]]
+  %aws_ec2_routetable_resources.Properties.VpcId == {"Ref":"Vpc"}
+}
+let aws_ec2_internetgateway_resources = Resources.*[ Type == 'AWS::EC2::InternetGateway' ]
+rule aws_ec2_internetgateway when %aws_ec2_internetgateway_resources !empty {
+  %aws_ec2_internetgateway_resources.Properties.Tags == [{"Key":"Name","Value":"awscdk-com-igw"}]
+}
+let aws_ec2_vpcgatewayattachment_resources = Resources.*[ Type == 'AWS::EC2::VPCGatewayAttachment' ]
+rule aws_ec2_vpcgatewayattachment when %aws_ec2_vpcgatewayattachment_resources !empty {
+  %aws_ec2_vpcgatewayattachment_resources.Properties.InternetGatewayId == {"Ref":"InternetGateway"}
+  %aws_ec2_vpcgatewayattachment_resources.Properties.VpcId == {"Ref":"Vpc"}
+}
+let aws_ec2_subnetroutetableassociation_resources = Resources.*[ Type == 'AWS::EC2::SubnetRouteTableAssociation' ]
+rule aws_ec2_subnetroutetableassociation when %aws_ec2_subnetroutetableassociation_resources !empty {
+  %aws_ec2_subnetroutetableassociation_resources.Properties.SubnetId IN [{"Ref":"subnetpublic1c"}, {"Ref":"subnetdb1a"}, {"Ref":"subnetdb1c"}, {"Ref":"subnetapp1c"}, {"Ref":"subnetpublic1a"}, {"Ref":"subnetapp1a"}]
+  %aws_ec2_subnetroutetableassociation_resources.Properties.RouteTableId IN [{"Ref":"RouteTableApp1a"}, {"Ref":"RouteTablePublic"}, {"Ref":"RouteTableApp1c"}, {"Ref":"RouteTableDb"}]
+}
+let aws_ec2_eip_resources = Resources.*[ Type == 'AWS::EC2::EIP' ]
+rule aws_ec2_eip when %aws_ec2_eip_resources !empty {
+  %aws_ec2_eip_resources.Properties.Tags IN [[{"Key":"Name","Value":"awscdk-com-eip-ngw-1a"}], [{"Key":"Name","Value":"awscdk-com-eip-ngw-1c"}]]
+  %aws_ec2_eip_resources.Properties.Domain == "vpc"
+}
+let aws_ec2_subnet_resources = Resources.*[ Type == 'AWS::EC2::Subnet' ]
+rule aws_ec2_subnet when %aws_ec2_subnet_resources !empty {
+  %aws_ec2_subnet_resources.Properties.Tags IN [[{"Key":"Name","Value":"awscdk-com-subnet-public-1a"}], [{"Key":"Name","Value":"awscdk-com-subnet-db-1c"}], [{"Key":"Name","Value":"awscdk-com-subnet-db-1a"}], [{"Key":"Name","Value":"awscdk-com-subnet-app-1c"}], [{"Key":"Name","Value":"awscdk-com-subnet-public-1c"}], [{"Key":"Name","Value":"awscdk-com-subnet-app-1a"}]]
+  %aws_ec2_subnet_resources.Properties.AvailabilityZone IN ["ap-northeast-1a", "ap-northeast-1c"]
+  %aws_ec2_subnet_resources.Properties.CidrBlock IN ["10.0.12.0/24", "10.0.21.0/24", "10.0.11.0/24", "10.0.32.0/24", "10.0.22.0/24", "10.0.31.0/24"]
+  %aws_ec2_subnet_resources.Properties.VpcId == {"Ref":"Vpc"}
+}
+let aws_ec2_route_natgateway_resources = Resources.*[ Type == 'AWS::EC2::Route' Properties.NatGatewayId exists ]
+rule aws_ec2_route_natgateway when %aws_ec2_route_natgateway_resources !empty {
+  %aws_ec2_route_natgateway_resources.Properties.NatGatewayId IN [{"Ref":"ngw1a"}, {"Ref":"ngw1c"}]
+  %aws_ec2_route_natgateway_resources.Properties.RouteTableId IN [{"Ref":"RouteTableApp1c"}, {"Ref":"RouteTableApp1a"}]
+  %aws_ec2_route_natgateway_resources.Properties.DestinationCidrBlock == "0.0.0.0/0"
+}
+let aws_ec2_route_gateway_resources = Resources.*[ Type == 'AWS::EC2::Route' Properties.GatewayId exists ]
+rule aws_ec2_route_gateway when %aws_ec2_route_gateway_resources !empty {
+  %aws_ec2_route_gateway_resources.Properties.GatewayId == {"Ref":"InternetGateway"}
+  %aws_ec2_route_gateway_resources.Properties.RouteTableId == {"Ref": "RouteTablePublic"}
+  %aws_ec2_route_gateway_resources.Properties.DestinationCidrBlock == "0.0.0.0/0"
+}
+let aws_ec2_natgateway_resources = Resources.*[ Type == 'AWS::EC2::NatGateway' ]
+rule aws_ec2_natgateway when %aws_ec2_natgateway_resources !empty {
+  %aws_ec2_natgateway_resources.Properties.SubnetId IN [{"Ref":"subnetpublic1a"}, {"Ref":"subnetpublic1c"}]
+  %aws_ec2_natgateway_resources.Properties.Tags IN [[{"Key":"Name","Value":"awscdk-com-ngw-1a"}], [{"Key":"Name","Value":"awscdk-com-ngw-1c"}]]
+  %aws_ec2_natgateway_resources.Properties.AllocationId IN [{"Fn::GetAtt":["eipngw1c","AllocationId"]}, {"Fn::GetAtt":["eipngw1a","AllocationId"]}]
+}

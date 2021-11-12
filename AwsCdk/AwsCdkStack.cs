@@ -36,6 +36,8 @@ namespace AwsCdk
                 ngwRes.Ngw1a!,
                 ngwRes.Ngw1c!
             );
+
+            var iamRes = new IamResource(this);
         }
     }
 }

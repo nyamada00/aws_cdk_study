@@ -13,7 +13,6 @@ namespace AwsCdk.Tests
         [Fact]
         public void EipTest()
         {
-            // VPC
             template.ResourceCountIs("AWS::EC2::EIP", 2);
             template.HasResourceProperties("AWS::EC2::EIP", new Dictionary<string, object>{
                 { "Domain", "vpc" },
