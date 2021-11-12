@@ -1,7 +1,6 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
-using System.Collections.ObjectModel;
 
 
 namespace AwsCdk.Resource
@@ -17,19 +16,19 @@ namespace AwsCdk.Resource
         internal CfnSubnet? SubnetDb1a { get; private set; }
         internal CfnSubnet? SubnetDb1c { get; private set; }
 
-        private readonly CfnVPC vpc;
+        private readonly CfnVPC? vpc;
 
-        private ReadOnlyCollection<ResourceInfo> resourceInfoList;
+        private SubnetResource() { }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="vpcRes">VPC</param>
-        public SubnetResource(CfnVPC vpc) : base()
+        public SubnetResource(Construct scope, CfnVPC vpc) : base()
         {
             this.vpc = vpc;
 
-            var resourcesInfo = new[]{
+            var resourcesInfos = new[]{
                 new ResourceInfo(
                     "SubnetPublic1a",
                     "10.0.11.0/24",
@@ -74,11 +73,15 @@ namespace AwsCdk.Resource
                 ),
             };
 
-            resourceInfoList = new ReadOnlyCollection<ResourceInfo>(resourcesInfo);
+            CreateResources(scope, resourcesInfos);
         }
 
-        /// <inheritdoc/>
-        internal override void CreateResources(Construct scope)
+        /// <summary>
+        /// リソース作成
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="resourceInfoList"></param>
+        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {
@@ -98,7 +101,7 @@ namespace AwsCdk.Resource
             return new CfnSubnet(scope, resourcesInfo.ResourceName, new CfnSubnetProps
             {
                 CidrBlock = resourcesInfo.CidrBlock,
-                VpcId = vpc.Ref,
+                VpcId = vpc!.Ref,
                 AvailabilityZone = resourcesInfo.AvailabilityZone,
                 Tags = new[]{
                     new CfnTag{

@@ -7,15 +7,21 @@ namespace AwsCdk.Resource
     {
         internal CfnInternetGateway? Igw { get; private set; }
 
-        private readonly CfnVPC vpc;
+        private readonly CfnVPC? vpc;
 
-        public IgwResource(CfnVPC vpc) : base()
+        private IgwResource() { }
+
+        public IgwResource(Construct scope, CfnVPC vpc) : base()
         {
             this.vpc = vpc;
+            CreateResources(scope);
         }
 
-        /// <inheritdoc/>
-        internal override void CreateResources(Construct scope)
+        /// <summary>
+        /// リソース作成
+        /// </summary>
+        /// <param name="scope"></param>
+        private void CreateResources(Construct scope)
         {
             Igw = new CfnInternetGateway(scope, "InternetGateway", new CfnInternetGatewayProps()
             {
@@ -26,7 +32,7 @@ namespace AwsCdk.Resource
 
             new CfnVPCGatewayAttachment(scope, "VpcGateway", new CfnVPCGatewayAttachmentProps()
             {
-                VpcId = vpc.Ref,
+                VpcId = vpc!.Ref,
                 InternetGatewayId = Igw.Ref
             });
         }

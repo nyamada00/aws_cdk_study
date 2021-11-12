@@ -3,41 +3,10 @@ using Amazon.CDK.Assertions;
 using Amazon.CDK;
 using System.Collections.Generic;
 
-namespace AwsCdk.Tests.Resource
+namespace AwsCdk.Tests
 {
-    public class RtbResourceTest
+    public partial class AwsCdkStackTest
     {
-        const string SYSTEM_NAME = "RtbResourceTest";
-        const string ENV_TYPE = "test";
-
-        private App app;
-        private Template template;
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        public RtbResourceTest()
-        {
-            app = new App(new AppProps
-            {
-                Context = new Dictionary<string, object>{
-                    {"systemName",SYSTEM_NAME},
-                    {"envType", ENV_TYPE}
-                }
-            });
-
-            template = Template.FromStack(new AwsCdkStack(app, "RtbResourceTestStack", new StackProps
-            {
-                Env = new Environment
-                {
-                    Account = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_ACCOUNT"),
-                    Region = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_REGION"),
-                }
-
-                // For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-            }));
-        }
-
         /// <summary>
         /// RouteTable テスト
         /// </summary>

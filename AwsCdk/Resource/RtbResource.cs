@@ -1,7 +1,5 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
-using System;
-using System.Collections.ObjectModel;
 
 namespace AwsCdk.Resource
 {
@@ -18,17 +16,18 @@ namespace AwsCdk.Resource
 
         private record ResourceInfo(string Id, RouteInfo[] Routes, AssociationInfo[] Associations, string ResourceName, System.Action<CfnRouteTable> Assign);
 
-        private readonly CfnVPC vpc;
-        private readonly CfnInternetGateway igw;
-        private readonly CfnSubnet subnetPublic1a;
-        private readonly CfnSubnet subnetPublic1c;
-        private readonly CfnSubnet subnetApp1a;
-        private readonly CfnSubnet subnetApp1c;
-        private readonly CfnSubnet subnetDb1a;
-        private readonly CfnSubnet subnetDb1c;
-        private readonly CfnNatGateway natGateway1a;
-        private readonly CfnNatGateway natGateway1c;
-        private ReadOnlyCollection<ResourceInfo> resourceInfoList;
+        private readonly CfnVPC? vpc;
+        private readonly CfnInternetGateway? igw;
+        private readonly CfnSubnet? subnetPublic1a;
+        private readonly CfnSubnet? subnetPublic1c;
+        private readonly CfnSubnet? subnetApp1a;
+        private readonly CfnSubnet? subnetApp1c;
+        private readonly CfnSubnet? subnetDb1a;
+        private readonly CfnSubnet? subnetDb1c;
+        private readonly CfnNatGateway? natGateway1a;
+        private readonly CfnNatGateway? natGateway1c;
+
+        private RtbResource() { }
 
         /// <summary>
         ///  コンストラクタ
@@ -44,7 +43,9 @@ namespace AwsCdk.Resource
         /// <param name="natGateway1a"></param>
         /// <param name="natGateway1c"></param>
         /// <returns></returns>
-        public RtbResource(CfnVPC vpc,
+        public RtbResource(
+         Construct scope,
+         CfnVPC vpc,
          CfnSubnet subnetPublic1a,
          CfnSubnet subnetPublic1c,
          CfnSubnet subnetApp1a,
@@ -67,7 +68,7 @@ namespace AwsCdk.Resource
             this.natGateway1a = natGateway1a;
             this.natGateway1c = natGateway1c;
 
-            var resourcesInfo = new[]{
+            var resourcesInfos = new[]{
                 new ResourceInfo(
                     Id: "RouteTablePublic",
                     Routes: new[]{
@@ -147,11 +148,15 @@ namespace AwsCdk.Resource
                 ),
             };
 
-            resourceInfoList = new ReadOnlyCollection<ResourceInfo>(resourcesInfo);
+            CreateResources(scope, resourcesInfos);
         }
 
-        /// <inheritdoc/>
-        internal override void CreateResources(Construct scope)
+        /// <summary>
+        /// リソース作成
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="resourceInfoList"></param>
+        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {
@@ -172,7 +177,7 @@ namespace AwsCdk.Resource
             var routeTable = new CfnRouteTable(scope, resourceInfo.Id,
                 new CfnRouteTableProps
                 {
-                    VpcId = this.vpc.Ref,
+                    VpcId = this.vpc!.Ref,
                     Tags = new CfnTag[]{
                         new CfnTag{
                             Key= "Name",

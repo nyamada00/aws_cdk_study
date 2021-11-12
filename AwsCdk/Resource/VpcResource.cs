@@ -7,8 +7,25 @@ namespace AwsCdk.Resource
     {
         internal CfnVPC? Vpc { get; private set; }
 
-        /// <inheritdoc/>
-        internal override void CreateResources(Construct scope)
+        private VpcResource()
+        {
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <returns></returns>
+        public VpcResource(Construct scope) : base()
+        {
+            CreateResources(scope);
+        }
+
+        /// <summary>
+        /// リソース作成
+        /// </summary>
+        /// <param name="scope"></param>
+        private void CreateResources(Construct scope)
         {
             Vpc = new CfnVPC(scope, "Vpc", new CfnVPCProps
             {

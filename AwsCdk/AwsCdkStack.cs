@@ -8,22 +8,23 @@ namespace AwsCdk
     {
         internal AwsCdkStack(Construct scope, string id, IStackProps? props = null) : base(scope, id, props)
         {
-            var vpcRes = new VpcResource();
-            vpcRes.CreateResources(this);
+            var vpcRes = new VpcResource(this);
 
-            var subnetRes = new SubnetResource(vpcRes.Vpc!);
-            subnetRes.CreateResources(this);
+            var subnetRes = new SubnetResource(this, vpcRes.Vpc!);
 
-            var igwRes = new IgwResource(vpcRes.Vpc!);
-            igwRes.CreateResources(this);
+            var igwRes = new IgwResource(this, vpcRes.Vpc!);
 
-            var eipRes = new EipResource();
-            eipRes.CreateResources(this);
+            var eipRes = new EipResource(this);
 
-            var ngwRes = new NatGatewayResource(subnetRes.SubnetPublic1a!, subnetRes.SubnetPublic1c!, eipRes.Eip1a!, eipRes.Eip1c!);
-            ngwRes.CreateResources(this);
+            var ngwRes = new NatGatewayResource(
+                this,
+                subnetRes.SubnetPublic1a!,
+                subnetRes.SubnetPublic1c!,
+                eipRes.Eip1a!,
+                eipRes.Eip1c!);
 
             var rtbRes = new RtbResource(
+                this,
                 vpcRes.Vpc!,
                 subnetRes.SubnetPublic1a!,
                 subnetRes.SubnetPublic1c!,
@@ -35,7 +36,6 @@ namespace AwsCdk
                 ngwRes.Ngw1a!,
                 ngwRes.Ngw1c!
             );
-            rtbRes.CreateResources(this);
         }
     }
 }

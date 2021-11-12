@@ -5,11 +5,6 @@ namespace AwsCdk.Resource
     internal abstract class AbstractResource
     {
         /// <summary>
-        /// リソース作成
-        /// </summary>
-        /// <param name="scope">コンストラクト</param>
-        abstract internal void CreateResources(Construct scope);
-        /// <summary>
         /// リソース名作成
         /// </summary>
         /// <param name="scope"></param>

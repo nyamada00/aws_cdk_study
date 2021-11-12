@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AwsCdk.Tests
 {
-    public class AwsCdkStackTest
+    public partial class AwsCdkStackTest
     {
         const string SYSTEM_NAME = "awscdk_study";
         const string ENV_TYPE = "test";

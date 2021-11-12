@@ -1,7 +1,6 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
-using System.Collections.ObjectModel;
 
 
 namespace AwsCdk.Resource
@@ -13,14 +12,14 @@ namespace AwsCdk.Resource
         internal CfnEIP? Eip1a { get; private set; }
         internal CfnEIP? Eip1c { get; private set; }
 
-        private ReadOnlyCollection<ResourceInfo> resourceInfoList;
+        private EipResource() { }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EipResource() : base()
+        public EipResource(Construct scope) : base()
         {
-            var resourcesInfo = new[]{
+            var resourcesInfos = new[]{
                 new ResourceInfo(
                     "ElasticIpNgw1a",
                     "eip-ngw-1a",
@@ -33,11 +32,15 @@ namespace AwsCdk.Resource
                 )
             };
 
-            resourceInfoList = new ReadOnlyCollection<ResourceInfo>(resourcesInfo);
+            CreateResources(scope, resourcesInfos);
         }
 
-        /// <inheritdoc/>
-        internal override void CreateResources(Construct scope)
+        /// <summary>
+        /// リソース作成
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="resourceInfoList"></param>
+        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {
