@@ -39,6 +39,7 @@ namespace AwsCdk
             );
 
             var iamRes = new IamResource(this);
+            var sgRes = new SgResource(this, vpcRes.Vpc!);
         }
     }
 }
