@@ -40,6 +40,11 @@ namespace AwsCdk
 
             var iamRes = new IamResource(this);
             var sgRes = new SgResource(this, vpcRes.Vpc!);
+            var ec2Res = new Ec2Resource(this,
+                subnetRes.SubnetApp1a!,
+                subnetRes.SubnetApp1c!,
+                iamRes.InstanceProfileEc2!,
+                sgRes.ec2!);
         }
     }
 }
