@@ -3,7 +3,6 @@ using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
 
-
 namespace AwsCdk.Resource
 {
     internal class SgResource : AbstractResource
@@ -15,7 +14,7 @@ namespace AwsCdk.Resource
         public CfnSecurityGroup? ec2;
         public CfnSecurityGroup? rds;
 
-        private CfnVPC? vpc;
+        private readonly CfnVPC? vpc;
 
         private SgResource() { }
 
@@ -107,10 +106,10 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var securityGroup = this.createSecurityGroup(scope, resourceInfo);
+                var securityGroup = this.CreateSecurityGroup(scope, resourceInfo);
                 resourceInfo.Assign(securityGroup);
 
-                this.createSecurityGroupIngress(scope, resourceInfo);
+                CreateSecurityGroupIngress(scope, resourceInfo);
             }
         }
 
@@ -120,7 +119,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnSecurityGroup createSecurityGroup(Construct scope, ResourceInfo resourcesInfo)
+        private CfnSecurityGroup CreateSecurityGroup(Construct scope, ResourceInfo resourcesInfo)
         {
             var resourceName = CreateResourceName(scope, resourcesInfo.ResourceName);
             var securityGroup = new CfnSecurityGroup(scope, resourcesInfo.Id, new CfnSecurityGroupProps
@@ -139,14 +138,15 @@ namespace AwsCdk.Resource
             return securityGroup;
         }
 
-        private void createSecurityGroupIngress(Construct scope, ResourceInfo resourceInfo)
+        private static void CreateSecurityGroupIngress(Construct scope, ResourceInfo resourceInfo)
         {
             foreach (var ingress in resourceInfo.Ingresses)
             {
-                var securityGroupIngress = new CfnSecurityGroupIngress(scope, ingress.Id, ingress.SecurityGroupIngressProps);
-                securityGroupIngress.GroupId = ingress.GroupId();
-
-                securityGroupIngress.SourceSecurityGroupId = ingress.SourceSecurityGroupId?.Invoke();
+                new CfnSecurityGroupIngress(scope, ingress.Id, ingress.SecurityGroupIngressProps)
+                {
+                    GroupId = ingress.GroupId(),
+                    SourceSecurityGroupId = ingress.SourceSecurityGroupId?.Invoke()
+                };
             }
         }
     }

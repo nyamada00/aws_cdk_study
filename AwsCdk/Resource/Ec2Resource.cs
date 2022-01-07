@@ -66,7 +66,7 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var instance = createInstance(scope, resourceInfo);
+                var instance = CreateInstance(scope, resourceInfo);
                 resourceInfo.Assign(instance);
             }
         }
@@ -77,15 +77,15 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnInstance createInstance(Construct scope, ResourceInfo resourcesInfo)
+        private CfnInstance CreateInstance(Construct scope, ResourceInfo resourcesInfo)
         {
             return new CfnInstance(scope, resourcesInfo.Id, new CfnInstanceProps
             {
                 AvailabilityZone = resourcesInfo.AvailableZone,
-                IamInstanceProfile = this.instanceProfileEc2!.Ref,
+                IamInstanceProfile = instanceProfileEc2!.Ref,
                 ImageId = LatestImageIdAmazonLinux2,
                 InstanceType = InstanceType,
-                SecurityGroupIds = new[] { this.securityGroupEc2!.AttrGroupId },
+                SecurityGroupIds = new[] { securityGroupEc2!.AttrGroupId },
                 SubnetId = resourcesInfo.SubnetId(),
                 Tags = new[]{
                     new CfnTag{Key="Name",Value=CreateResourceName(scope,resourcesInfo.ResourceName)}

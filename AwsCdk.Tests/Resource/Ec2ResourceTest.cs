@@ -44,7 +44,6 @@ namespace AwsCdk.Tests
                     }
                 }
             });
-
         }
     }
 }

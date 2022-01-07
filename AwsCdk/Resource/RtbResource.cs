@@ -133,7 +133,7 @@ namespace AwsCdk.Resource
                 ),
                 new ResourceInfo(
                     Id: "RouteTableDb",
-                    Routes: new RouteInfo[]{},
+                    Routes: System.Array.Empty<RouteInfo>(),
                     Associations: new []{
                         new AssociationInfo(
                             Id: "AssociationDb1a",
@@ -161,10 +161,9 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var subnet = createRouteTable(scope, resourceInfo);
+                var subnet = CreateRouteTable(scope, resourceInfo);
                 resourceInfo.Assign(subnet);
             }
-
         }
 
         /// <summary>
@@ -173,7 +172,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourceInfo"></param>
         /// <returns></returns>
-        private CfnRouteTable createRouteTable(Construct scope, ResourceInfo resourceInfo)
+        private CfnRouteTable CreateRouteTable(Construct scope, ResourceInfo resourceInfo)
         {
             var routeTable = new CfnRouteTable(scope, resourceInfo.Id,
                 new CfnRouteTableProps
@@ -182,29 +181,29 @@ namespace AwsCdk.Resource
                     Tags = new CfnTag[]{
                         new CfnTag{
                             Key= "Name",
-                            Value = this.CreateResourceName(scope, resourceInfo.ResourceName)
+                            Value = CreateResourceName(scope, resourceInfo.ResourceName)
                         }
                     }
                 });
             foreach (var routeInfo in resourceInfo.Routes)
             {
-                this.createRoute(scope, routeInfo, routeTable);
+                CreateRoute(scope, routeInfo, routeTable);
             }
 
             foreach (var associationInfo in resourceInfo.Associations)
             {
-                this.createAssociation(scope, associationInfo, routeTable);
+                CreateAssociation(scope, associationInfo, routeTable);
             }
             return routeTable;
         }
 
         /// <summary>
-        /// 
+        /// Association作成
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="associationInfo"></param>
         /// <param name="routeTable"></param>
-        private void createAssociation(Construct scope, AssociationInfo associationInfo, CfnRouteTable routeTable)
+        private static void CreateAssociation(Construct scope, AssociationInfo associationInfo, CfnRouteTable routeTable)
         {
             new CfnSubnetRouteTableAssociation(scope, associationInfo.Id, new CfnSubnetRouteTableAssociationProps
             {
@@ -214,12 +213,12 @@ namespace AwsCdk.Resource
         }
 
         /// <summary>
-        /// 
+        /// Route作成
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="routeInfo"></param>
         /// <param name="routeTable"></param>
-        private void createRoute(Construct scope, RouteInfo routeInfo, CfnRouteTable routeTable)
+        private static void CreateRoute(Construct scope, RouteInfo routeInfo, CfnRouteTable routeTable)
         {
             var route = new CfnRoute(scope, routeInfo.Id, new CfnRouteProps
             {

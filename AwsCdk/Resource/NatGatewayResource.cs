@@ -3,7 +3,6 @@ using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
 
-
 namespace AwsCdk.Resource
 {
     internal class NatGatewayResource : AbstractResource
@@ -55,7 +54,6 @@ namespace AwsCdk.Resource
                 ),
             };
             CreateResources(scope, resourcesInfos);
-
         }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var subnet = createNgw(scope, resourceInfo);
+                var subnet = CreateNgw(scope, resourceInfo);
                 resourceInfo.Assign(subnet);
             }
         }
@@ -78,7 +76,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnNatGateway createNgw(Construct scope, ResourceInfo resourcesInfo)
+        private static CfnNatGateway CreateNgw(Construct scope, ResourceInfo resourcesInfo)
         {
             return new CfnNatGateway(scope, resourcesInfo.ResourceName, new CfnNatGatewayProps
             {

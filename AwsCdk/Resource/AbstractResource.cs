@@ -10,7 +10,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="originalName"></param>
         /// <returns></returns>
-        protected internal string CreateResourceName(Construct scope, string originalName)
+        protected internal static string CreateResourceName(Construct scope, string originalName)
         {
             var systemName = scope.Node.TryGetContext("systemName");
             var envType = scope.Node.TryGetContext("envType");

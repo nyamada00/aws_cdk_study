@@ -3,7 +3,6 @@ using Amazon.CDK;
 using Amazon.CDK.AWS.IAM;
 using System;
 
-
 namespace AwsCdk.Resource
 {
     internal class IamResource : AbstractResource
@@ -63,7 +62,7 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var eip = createRole(scope, resourceInfo);
+                var eip = CreateRole(scope, resourceInfo);
                 resourceInfo.Assign(eip);
             }
 
@@ -80,7 +79,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnRole createRole(Construct scope, ResourceInfo resourcesInfo)
+        private static CfnRole CreateRole(Construct scope, ResourceInfo resourcesInfo)
         {
             var policyStatement = new PolicyStatement(resourcesInfo.PolicyStatementProps);
             var policyDocument = new PolicyDocument(new PolicyDocumentProps

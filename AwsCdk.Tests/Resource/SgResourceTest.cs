@@ -25,7 +25,6 @@ namespace AwsCdk.Tests
                         }
                     }
                 }
-
                 }
             );
             template.HasResourceProperties("AWS::EC2::SecurityGroup", new Dictionary<string, object>{
@@ -39,7 +38,6 @@ namespace AwsCdk.Tests
                         }
                     }
                 }
-
                 }
             );
             template.HasResourceProperties("AWS::EC2::SecurityGroup", new Dictionary<string, object>{

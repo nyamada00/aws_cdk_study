@@ -1,8 +1,6 @@
 using Constructs;
 using Amazon.CDK;
 using AwsCdk.Resource;
-
-
 namespace AwsCdk
 {
     public class AwsCdkStack : Stack

@@ -3,7 +3,6 @@ using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
 
-
 namespace AwsCdk.Resource
 {
     internal class SubnetResource : AbstractResource
@@ -86,7 +85,7 @@ namespace AwsCdk.Resource
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var subnet = createSubnet(scope, resourceInfo);
+                var subnet = CreateSubnet(scope, resourceInfo);
                 resourceInfo.Assign(subnet);
             }
         }
@@ -97,7 +96,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnSubnet createSubnet(Construct scope, ResourceInfo resourcesInfo)
+        private CfnSubnet CreateSubnet(Construct scope, ResourceInfo resourcesInfo)
         {
             return new CfnSubnet(scope, resourcesInfo.ResourceName, new CfnSubnetProps
             {
