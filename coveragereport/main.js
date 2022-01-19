@@ -224,9 +224,10 @@ var assemblies = [
   {
     "name": "AwsCdk",
     "classes": [
-      { "name": "AwsCdk.AwsCdkStack", "rp": "AwsCdk_AwsCdkStack.html", "cl": 33, "ucl": 0, "cal": 33, "tl": 48, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "AwsCdk.AwsCdkStack", "rp": "AwsCdk_AwsCdkStack.html", "cl": 40, "ucl": 0, "cal": 40, "tl": 55, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "AwsCdk.Resource.AbstractResource", "rp": "AwsCdk_AbstractResource.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 20, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "AwsCdk.Resource.Ec2Resource", "rp": "AwsCdk_Ec2Resource.html", "cl": 48, "ucl": 1, "cal": 49, "tl": 96, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
+      { "name": "AwsCdk.Resource.AlbResource", "rp": "AwsCdk_AlbResource.html", "cl": 67, "ucl": 1, "cal": 68, "tl": 126, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "AwsCdk.Resource.Ec2Resource", "rp": "AwsCdk_Ec2Resource.html", "cl": 49, "ucl": 1, "cal": 50, "tl": 101, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
       { "name": "AwsCdk.Resource.EipResource", "rp": "AwsCdk_EipResource.html", "cl": 38, "ucl": 1, "cal": 39, "tl": 72, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
       { "name": "AwsCdk.Resource.IamResource", "rp": "AwsCdk_IamResource.html", "cl": 61, "ucl": 1, "cal": 62, "tl": 98, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
       { "name": "AwsCdk.Resource.IgwResource", "rp": "AwsCdk_IgwResource.html", "cl": 19, "ucl": 1, "cal": 20, "tl": 41, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },

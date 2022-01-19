@@ -3,6 +3,8 @@ using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
 using Amazon.CDK.AWS.IAM;
+using System.Text;
+using System.IO;
 
 namespace AwsCdk.Resource
 {
@@ -19,6 +21,8 @@ namespace AwsCdk.Resource
         private readonly CfnSubnet? subnetApp1c;
         private readonly CfnInstanceProfile? instanceProfileEc2;
         private readonly CfnSecurityGroup? securityGroupEc2;
+
+        private const String UserDataFilePath = "../../script/ec2/userData.sh";
 
         private Ec2Resource() { }
 
@@ -89,7 +93,8 @@ namespace AwsCdk.Resource
                 SubnetId = resourcesInfo.SubnetId(),
                 Tags = new[]{
                     new CfnTag{Key="Name",Value=CreateResourceName(scope,resourcesInfo.ResourceName)}
-                }
+                },
+                UserData = Convert.ToBase64String(File.ReadAllBytes(UserDataFilePath))
             });
         }
     }
