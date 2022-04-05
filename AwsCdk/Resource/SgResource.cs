@@ -142,7 +142,7 @@ namespace AwsCdk.Resource
         {
             foreach (var ingress in resourceInfo.Ingresses)
             {
-                new CfnSecurityGroupIngress(scope, ingress.Id, ingress.SecurityGroupIngressProps)
+                _ = new CfnSecurityGroupIngress(scope, ingress.Id, ingress.SecurityGroupIngressProps)
                 {
                     GroupId = ingress.GroupId(),
                     SourceSecurityGroupId = ingress.SourceSecurityGroupId?.Invoke()

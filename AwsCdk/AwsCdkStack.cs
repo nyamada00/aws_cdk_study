@@ -21,8 +21,7 @@ namespace AwsCdk
                 subnetRes.SubnetPublic1c!,
                 eipRes.Eip1a!,
                 eipRes.Eip1c!);
-
-            var rtbRes = new RtbResource(
+            _ = new RtbResource(
                 this,
                 vpcRes.Vpc!,
                 subnetRes.SubnetPublic1a!,
@@ -43,7 +42,7 @@ namespace AwsCdk
                 subnetRes.SubnetApp1c!,
                 iamRes.InstanceProfileEc2!,
                 sgRes.ec2!);
-            var albRes = new AlbResource(this,
+            _ = new AlbResource(this,
                 vpcRes.Vpc!,
                 subnetRes.SubnetPublic1a!,
                 subnetRes.SubnetPublic1c!,

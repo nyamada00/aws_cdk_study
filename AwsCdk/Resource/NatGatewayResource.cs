@@ -12,11 +12,11 @@ namespace AwsCdk.Resource
         internal CfnNatGateway? Ngw1a { get; private set; }
         internal CfnNatGateway? Ngw1c { get; private set; }
 
-        private CfnSubnet? SubnetPublic1a { get; }
-        private CfnSubnet? SubnetPublic1c { get; }
+        // private CfnSubnet? SubnetPublic1a { get; }
+        // private CfnSubnet? SubnetPublic1c { get; }
 
-        private CfnEIP? EipNgw1a { get; }
-        private CfnEIP? EipNgw1c { get; }
+        // private CfnEIP? EipNgw1a { get; }
+        // private CfnEIP? EipNgw1c { get; }
 
         private NatGatewayResource() { }
 
@@ -32,10 +32,10 @@ namespace AwsCdk.Resource
             CfnEIP eipNgw1c
         ) : base()
         {
-            this.SubnetPublic1a = subnetPublic1a;
-            this.SubnetPublic1c = subnetPublic1c;
-            this.EipNgw1a = eipNgw1a;
-            this.EipNgw1c = eipNgw1c;
+            // this.SubnetPublic1a = subnetPublic1a;
+            // this.SubnetPublic1c = subnetPublic1c;
+            // this.EipNgw1a = eipNgw1a;
+            // this.EipNgw1c = eipNgw1c;
 
             var resourcesInfos = new[]{
                 new ResourceInfo(
@@ -61,7 +61,7 @@ namespace AwsCdk.Resource
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="resourceInfoList"></param>
-        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
+        private static void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {

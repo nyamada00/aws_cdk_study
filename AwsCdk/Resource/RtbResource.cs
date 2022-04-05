@@ -205,7 +205,7 @@ namespace AwsCdk.Resource
         /// <param name="routeTable"></param>
         private static void CreateAssociation(Construct scope, AssociationInfo associationInfo, CfnRouteTable routeTable)
         {
-            new CfnSubnetRouteTableAssociation(scope, associationInfo.Id, new CfnSubnetRouteTableAssociationProps
+            _ = new CfnSubnetRouteTableAssociation(scope, associationInfo.Id, new CfnSubnetRouteTableAssociationProps
             {
                 RouteTableId = routeTable.Ref,
                 SubnetId = associationInfo.SubnetId()

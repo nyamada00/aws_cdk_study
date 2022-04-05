@@ -31,7 +31,7 @@ namespace AwsCdk.Resource
                 }
             });
 
-            new CfnVPCGatewayAttachment(scope, "VpcGateway", new CfnVPCGatewayAttachmentProps()
+            _ = new CfnVPCGatewayAttachment(scope, "VpcGateway", new CfnVPCGatewayAttachmentProps()
             {
                 VpcId = vpc!.Ref,
                 InternetGatewayId = Igw.Ref

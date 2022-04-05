@@ -2,7 +2,7 @@
 using AwsCdk;
 
 var app = new App();
-new AwsCdkStack(app, "AwsCdkStack", new StackProps
+_ = new AwsCdkStack(app, "AwsCdkStack", new StackProps
 {
     Env = new Amazon.CDK.Environment
     {
