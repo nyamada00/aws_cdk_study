@@ -22,7 +22,7 @@ namespace AwsCdk.Resource
         private readonly CfnInstanceProfile? instanceProfileEc2;
         private readonly CfnSecurityGroup? securityGroupEc2;
 
-        private const String UserDataFilePath = "../../script/ec2/userData.sh";
+        private readonly String UserDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../script/ec2/userData.sh");
 
         private Ec2Resource() { }
 
