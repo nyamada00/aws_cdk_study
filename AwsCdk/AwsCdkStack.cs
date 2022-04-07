@@ -49,6 +49,7 @@ namespace AwsCdk
                 sgRes.alb!,
                 ec2Res.Instance1a!,
                 ec2Res.Instance1c!);
+            _ = new SecretsManagerResource(this);
         }
     }
 }
