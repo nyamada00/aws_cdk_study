@@ -1,3 +1,4 @@
+using Constructs;
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 
@@ -30,7 +31,7 @@ namespace AwsCdk.Resource
                 }
             });
 
-            new CfnVPCGatewayAttachment(scope, "VpcGateway", new CfnVPCGatewayAttachmentProps()
+            _ = new CfnVPCGatewayAttachment(scope, "VpcGateway", new CfnVPCGatewayAttachmentProps()
             {
                 VpcId = vpc!.Ref,
                 InternetGatewayId = Igw.Ref

@@ -1,7 +1,7 @@
+using Constructs;
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
-
 
 namespace AwsCdk.Resource
 {
@@ -12,11 +12,11 @@ namespace AwsCdk.Resource
         internal CfnNatGateway? Ngw1a { get; private set; }
         internal CfnNatGateway? Ngw1c { get; private set; }
 
-        private CfnSubnet? SubnetPublic1a { get; }
-        private CfnSubnet? SubnetPublic1c { get; }
+        // private CfnSubnet? SubnetPublic1a { get; }
+        // private CfnSubnet? SubnetPublic1c { get; }
 
-        private CfnEIP? EipNgw1a { get; }
-        private CfnEIP? EipNgw1c { get; }
+        // private CfnEIP? EipNgw1a { get; }
+        // private CfnEIP? EipNgw1c { get; }
 
         private NatGatewayResource() { }
 
@@ -32,10 +32,10 @@ namespace AwsCdk.Resource
             CfnEIP eipNgw1c
         ) : base()
         {
-            this.SubnetPublic1a = subnetPublic1a;
-            this.SubnetPublic1c = subnetPublic1c;
-            this.EipNgw1a = eipNgw1a;
-            this.EipNgw1c = eipNgw1c;
+            // this.SubnetPublic1a = subnetPublic1a;
+            // this.SubnetPublic1c = subnetPublic1c;
+            // this.EipNgw1a = eipNgw1a;
+            // this.EipNgw1c = eipNgw1c;
 
             var resourcesInfos = new[]{
                 new ResourceInfo(
@@ -54,7 +54,6 @@ namespace AwsCdk.Resource
                 ),
             };
             CreateResources(scope, resourcesInfos);
-
         }
 
         /// <summary>
@@ -62,11 +61,11 @@ namespace AwsCdk.Resource
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="resourceInfoList"></param>
-        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
+        private static void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var subnet = createNgw(scope, resourceInfo);
+                var subnet = CreateNgw(scope, resourceInfo);
                 resourceInfo.Assign(subnet);
             }
         }
@@ -77,7 +76,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnNatGateway createNgw(Construct scope, ResourceInfo resourcesInfo)
+        private static CfnNatGateway CreateNgw(Construct scope, ResourceInfo resourcesInfo)
         {
             return new CfnNatGateway(scope, resourcesInfo.ResourceName, new CfnNatGatewayProps
             {

@@ -1,7 +1,6 @@
+using Constructs;
 using Amazon.CDK;
 using AwsCdk.Resource;
-
-
 namespace AwsCdk
 {
     public class AwsCdkStack : Stack
@@ -22,8 +21,7 @@ namespace AwsCdk
                 subnetRes.SubnetPublic1c!,
                 eipRes.Eip1a!,
                 eipRes.Eip1c!);
-
-            var rtbRes = new RtbResource(
+            _ = new RtbResource(
                 this,
                 vpcRes.Vpc!,
                 subnetRes.SubnetPublic1a!,
@@ -38,6 +36,20 @@ namespace AwsCdk
             );
 
             var iamRes = new IamResource(this);
+            var sgRes = new SgResource(this, vpcRes.Vpc!);
+            var ec2Res = new Ec2Resource(this,
+                subnetRes.SubnetApp1a!,
+                subnetRes.SubnetApp1c!,
+                iamRes.InstanceProfileEc2!,
+                sgRes.ec2!);
+            _ = new AlbResource(this,
+                vpcRes.Vpc!,
+                subnetRes.SubnetPublic1a!,
+                subnetRes.SubnetPublic1c!,
+                sgRes.alb!,
+                ec2Res.Instance1a!,
+                ec2Res.Instance1c!);
+            _ = new SecretsManagerResource(this);
         }
     }
 }

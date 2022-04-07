@@ -1,22 +1,14 @@
 ﻿using Amazon.CDK;
+using AwsCdk;
 
-namespace AwsCdk
+var app = new App();
+_ = new AwsCdkStack(app, "AwsCdkStack", new StackProps
 {
-    sealed class Program
+    Env = new Amazon.CDK.Environment
     {
-        public static void Main(string[] args)
-        {
-            var app = new App();
-            new AwsCdkStack(app, "AwsCdkStack", new StackProps
-            {
-                Env = new Amazon.CDK.Environment
-                {
-                    Account = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_ACCOUNT"),
-                    Region = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_REGION"),
-                }
-            });
-
-            app.Synth();
-        }
+        Account = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_ACCOUNT"),
+        Region = System.Environment.GetEnvironmentVariable("CDK_DEFAULT_REGION"),
     }
-}
+});
+
+app.Synth();

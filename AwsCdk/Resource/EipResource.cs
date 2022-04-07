@@ -1,7 +1,7 @@
+using Constructs;
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using System;
-
 
 namespace AwsCdk.Resource
 {
@@ -40,11 +40,11 @@ namespace AwsCdk.Resource
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="resourceInfoList"></param>
-        private void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
+        private static void CreateResources(Construct scope, ResourceInfo[] resourceInfoList)
         {
             foreach (var resourceInfo in resourceInfoList)
             {
-                var eip = createEip(scope, resourceInfo);
+                var eip = CreateEip(scope, resourceInfo);
                 resourceInfo.Assign(eip);
             }
         }
@@ -55,7 +55,7 @@ namespace AwsCdk.Resource
         /// <param name="scope"></param>
         /// <param name="resourcesInfo"></param>
         /// <returns></returns>
-        private CfnEIP createEip(Construct scope, ResourceInfo resourcesInfo)
+        private static CfnEIP CreateEip(Construct scope, ResourceInfo resourcesInfo)
         {
             return new CfnEIP(scope, resourcesInfo.ResourceName, new CfnEIPProps
             {

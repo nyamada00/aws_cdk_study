@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="*">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
     <PackageReference Include="xunit" Version="*" />
     <PackageReference Include="xunit.runner.visualstudio" Version="*">
@@ -23,8 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AwsCdk\AwsCdk.csproj" />
-    <PackageReference Include="Amazon.CDK" Version="*" />
-    <PackageReference Include="Amazon.CDK.Assertions" Version="*" />
+    <PackageReference Include="Amazon.CDK.Lib" Version="*" />
+    <PackageReference Include="Constructs" Version="*" />
   </ItemGroup>
 
 </Project>

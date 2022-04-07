@@ -7,11 +7,11 @@ namespace AwsCdk.Tests
 {
     public partial class AwsCdkStackTest
     {
-        const string SYSTEM_NAME = "awscdk_study";
-        const string ENV_TYPE = "test";
+        private const string SYSTEM_NAME = "awscdk_study";
+        private const string ENV_TYPE = "test";
 
-        private App app;
-        private Template template;
+        private readonly App app;
+        private readonly Template template;
 
         /// <summary>
         /// コンストラクタ
