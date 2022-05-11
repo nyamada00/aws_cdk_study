@@ -38,3 +38,7 @@
   - https://dev.classmethod.jp/articles/cdk-practice-17-ec2/
 - 実践！AWS CDK #18 ALB
   - https://dev.classmethod.jp/articles/cdk-practice-18-alb/
+- 実践！AWS CDK #19 Secrets Manager
+  - https://dev.classmethod.jp/articles/cdk-practice-19-secrets-manager/
+- 実践！AWS CDK #20 RDS サブネットグループ
+  - https://dev.classmethod.jp/articles/cdk-practice-20-rds-subnet-group/

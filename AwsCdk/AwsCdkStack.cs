@@ -50,6 +50,7 @@ namespace AwsCdk
                 ec2Res.Instance1a!,
                 ec2Res.Instance1c!);
             _ = new SecretsManagerResource(this);
+            _ = new RdsResource(this, subnetRes.SubnetDb1a!, subnetRes.SubnetDb1c!);
         }
     }
 }

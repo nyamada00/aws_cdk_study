@@ -221,7 +221,7 @@ var assemblies = [
   {
     "name": "AwsCdk",
     "classes": [
-      { "name": "AwsCdk.AwsCdkStack", "rp": "AwsCdk_AwsCdkStack.html", "cl": 41, "ucl": 0, "cal": 41, "tl": 55, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
+      { "name": "AwsCdk.AwsCdkStack", "rp": "AwsCdk_AwsCdkStack.html", "cl": 42, "ucl": 0, "cal": 42, "tl": 56, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.AbstractResource", "rp": "AwsCdk_AbstractResource.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 20, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.AlbResource", "rp": "AwsCdk_AlbResource.html", "cl": 67, "ucl": 1, "cal": 68, "tl": 126, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.Ec2Resource", "rp": "AwsCdk_Ec2Resource.html", "cl": 50, "ucl": 1, "cal": 51, "tl": 101, "ct": "LineCoverage", "cbm": "-", "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
@@ -229,6 +229,7 @@ var assemblies = [
       { "name": "AwsCdk.Resource.IamResource", "rp": "AwsCdk_IamResource.html", "cl": 61, "ucl": 1, "cal": 62, "tl": 98, "ct": "LineCoverage", "cbm": "-", "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.IgwResource", "rp": "AwsCdk_IgwResource.html", "cl": 19, "ucl": 1, "cal": 20, "tl": 41, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.NatGatewayResource", "rp": "AwsCdk_NatGatewayResource.html", "cl": 43, "ucl": 1, "cal": 44, "tl": 94, "ct": "LineCoverage", "cbm": "-", "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
+      { "name": "AwsCdk.Resource.RdsResource", "rp": "AwsCdk_RdsResource.html", "cl": 17, "ucl": 3, "cal": 20, "tl": 55, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.RtbResource", "rp": "AwsCdk_RtbResource.html", "cl": 152, "ucl": 1, "cal": 153, "tl": 239, "ct": "LineCoverage", "cbm": "-", "cb": 10, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.SecretsManagerResource", "rp": "AwsCdk_SecretsManagerResource.html", "cl": 31, "ucl": 1, "cal": 32, "tl": 71, "ct": "LineCoverage", "cbm": "-", "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
       { "name": "AwsCdk.Resource.SgResource", "rp": "AwsCdk_SgResource.html", "cl": 109, "ucl": 1, "cal": 110, "tl": 153, "ct": "LineCoverage", "cbm": "-", "cb": 6, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [] },
