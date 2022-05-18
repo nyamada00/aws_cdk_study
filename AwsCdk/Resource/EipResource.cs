@@ -5,7 +5,7 @@ using System;
 
 namespace AwsCdk.Resource
 {
-    internal class EipResource : AbstractResource
+    internal class EipResource
     {
         private record ResourceInfo(string Id, string ResourceName, Action<CfnEIP> Assign);
 
@@ -63,7 +63,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=CreateResourceName(scope, resourcesInfo.ResourceName)
+                        Value=ResourceUtility.CreateResourceName(scope, resourcesInfo.ResourceName)
                     }
                 }
             });

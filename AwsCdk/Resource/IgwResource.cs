@@ -4,7 +4,7 @@ using Amazon.CDK.AWS.EC2;
 
 namespace AwsCdk.Resource
 {
-    internal class IgwResource : AbstractResource
+    internal class IgwResource
     {
         internal CfnInternetGateway? Igw { get; private set; }
 
@@ -27,7 +27,7 @@ namespace AwsCdk.Resource
             Igw = new CfnInternetGateway(scope, "InternetGateway", new CfnInternetGatewayProps()
             {
                 Tags = new[]{
-                    new CfnTag{Key="Name", Value=CreateResourceName(scope,"igw")}
+                    new CfnTag{Key="Name", Value=ResourceUtility.CreateResourceName(scope,"igw")}
                 }
             });
 

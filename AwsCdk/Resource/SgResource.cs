@@ -5,7 +5,7 @@ using System;
 
 namespace AwsCdk.Resource
 {
-    internal class SgResource : AbstractResource
+    internal class SgResource
     {
         private record IngressInfo(string Id, CfnSecurityGroupIngressProps SecurityGroupIngressProps, Func<string> GroupId, Func<string>? SourceSecurityGroupId);
         private record ResourceInfo(string Id, string GroupDescription, IngressInfo[] Ingresses, string ResourceName, Action<CfnSecurityGroup> Assign);
@@ -121,7 +121,7 @@ namespace AwsCdk.Resource
         /// <returns></returns>
         private CfnSecurityGroup CreateSecurityGroup(Construct scope, ResourceInfo resourcesInfo)
         {
-            var resourceName = CreateResourceName(scope, resourcesInfo.ResourceName);
+            var resourceName = ResourceUtility.CreateResourceName(scope, resourcesInfo.ResourceName);
             var securityGroup = new CfnSecurityGroup(scope, resourcesInfo.Id, new CfnSecurityGroupProps
             {
                 GroupDescription = resourcesInfo.GroupDescription,

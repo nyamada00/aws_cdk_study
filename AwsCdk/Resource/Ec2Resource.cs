@@ -8,7 +8,7 @@ using System.IO;
 
 namespace AwsCdk.Resource
 {
-    internal class Ec2Resource : AbstractResource
+    internal class Ec2Resource
     {
         private record ResourceInfo(string Id, string AvailableZone, string ResourceName, Func<string> SubnetId, Action<CfnInstance> Assign);
 
@@ -92,7 +92,7 @@ namespace AwsCdk.Resource
                 SecurityGroupIds = new[] { securityGroupEc2!.AttrGroupId },
                 SubnetId = resourcesInfo.SubnetId(),
                 Tags = new[]{
-                    new CfnTag{Key="Name",Value=CreateResourceName(scope,resourcesInfo.ResourceName)}
+                    new CfnTag{Key="Name",Value=ResourceUtility.CreateResourceName(scope,resourcesInfo.ResourceName)}
                 },
                 UserData = Convert.ToBase64String(File.ReadAllBytes(UserDataFilePath))
             });

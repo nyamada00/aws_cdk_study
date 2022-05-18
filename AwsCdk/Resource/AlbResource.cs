@@ -6,7 +6,7 @@ using Amazon.CDK.AWS.ElasticLoadBalancingV2;
 
 namespace AwsCdk.Resource
 {
-    internal class AlbResource : AbstractResource
+    internal class AlbResource
     {
         internal CfnLoadBalancer? LoadBalancer { get; private set; }
         private readonly CfnVPC? vpc;
@@ -61,7 +61,7 @@ namespace AwsCdk.Resource
             return new CfnLoadBalancer(scope, "Alb", new CfnLoadBalancerProps
             {
                 IpAddressType = "ipv4",
-                Name = CreateResourceName(scope, "alb"),
+                Name = ResourceUtility.CreateResourceName(scope, "alb"),
                 Scheme = "internet-facing",
                 SecurityGroups = new[] { securityGroupAlb!.AttrGroupId },
                 Subnets = new[] { subnetPublic1a!.Ref, subnetPublic1c!.Ref },
@@ -78,7 +78,7 @@ namespace AwsCdk.Resource
         {
             return new CfnTargetGroup(scope, "AlbTargetGroup", new CfnTargetGroupProps
             {
-                Name = CreateResourceName(scope, "tg"),
+                Name = ResourceUtility.CreateResourceName(scope, "tg"),
                 Port = 80,
                 Protocol = "HTTP",
                 TargetType = "instance",

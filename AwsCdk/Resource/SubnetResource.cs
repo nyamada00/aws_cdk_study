@@ -5,7 +5,7 @@ using System;
 
 namespace AwsCdk.Resource
 {
-    internal class SubnetResource : AbstractResource
+    internal class SubnetResource
     {
         private record ResourceInfo(string Id, string CidrBlock, string AvailabilityZone, string ResourceName, Action<CfnSubnet> Assign);
 
@@ -106,7 +106,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=CreateResourceName(scope, resourcesInfo.ResourceName)
+                        Value=ResourceUtility.CreateResourceName(scope, resourcesInfo.ResourceName)
                     }
                 }
             });

@@ -5,7 +5,7 @@ using System;
 
 namespace AwsCdk.Resource
 {
-    internal class NatGatewayResource : AbstractResource
+    internal class NatGatewayResource
     {
         private record ResourceInfo(string Id, string AllocationId, string SubnetId, string ResourceName, Action<CfnNatGateway> Assign);
 
@@ -85,7 +85,7 @@ namespace AwsCdk.Resource
                 Tags = new[]{
                     new CfnTag{
                         Key="Name",
-                        Value=CreateResourceName(scope, resourcesInfo.ResourceName)
+                        Value=ResourceUtility.CreateResourceName(scope, resourcesInfo.ResourceName)
                     }
                 }
             });

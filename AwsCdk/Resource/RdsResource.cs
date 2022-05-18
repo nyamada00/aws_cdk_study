@@ -5,7 +5,7 @@ using Amazon.CDK.AWS.EC2;
 
 namespace AwsCdk.Resource
 {
-    internal class RdsResource : AbstractResource
+    internal class RdsResource
     {
 
         private readonly CfnSubnet? subnetDb1a;
@@ -48,7 +48,7 @@ namespace AwsCdk.Resource
             {
                 DbSubnetGroupDescription = "Subnet Group for RDS",
                 SubnetIds = new[] { this.subnetDb1a!.Ref, this.subnetDb1c!.Ref },
-                DbSubnetGroupName = CreateResourceName(scope, "sng-rds")
+                DbSubnetGroupName = ResourceUtility.CreateResourceName(scope, "sng-rds")
             });
         }
     }

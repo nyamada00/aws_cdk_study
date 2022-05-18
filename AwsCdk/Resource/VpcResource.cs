@@ -4,7 +4,7 @@ using Amazon.CDK.AWS.EC2;
 
 namespace AwsCdk.Resource
 {
-    internal class VpcResource : AbstractResource
+    internal class VpcResource
     {
         internal CfnVPC? Vpc { get; private set; }
 
@@ -31,7 +31,7 @@ namespace AwsCdk.Resource
             Vpc = new CfnVPC(scope, "Vpc", new CfnVPCProps
             {
                 CidrBlock = "10.0.0.0/16",
-                Tags = new[] { new CfnTag() { Key = "Name", Value = CreateResourceName(scope, "vpc") } }
+                Tags = new[] { new CfnTag() { Key = "Name", Value = ResourceUtility.CreateResourceName(scope, "vpc") } }
             });
         }
     }
