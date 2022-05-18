@@ -42,3 +42,5 @@
   - https://dev.classmethod.jp/articles/cdk-practice-19-secrets-manager/
 - 実践！AWS CDK #20 RDS サブネットグループ
   - https://dev.classmethod.jp/articles/cdk-practice-20-rds-subnet-group/
+- 実践！AWS CDK #21 RDS パラメータグループ
+  - https://dev.classmethod.jp/articles/cdk-practice-21-rds-parameter-group/
