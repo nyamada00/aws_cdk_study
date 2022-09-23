@@ -5,7 +5,7 @@ using Amazon.CDK.AWS.SecretsManager;
 
 namespace AwsCdk.Resource
 {
-    internal class SecretsManagerResource : AbstractResource
+    internal class SecretsManagerResource
     {
         internal CfnSecret? rdsCluster { get; private set; }
 
@@ -63,7 +63,7 @@ namespace AwsCdk.Resource
             {
                 Description = resourceInfo.Description,
                 GenerateSecretString = resourceInfo.GenerateSecretString,
-                Name = CreateResourceName(scope, resourceInfo.ResourceName)
+                Name = ResourceUtility.CreateResourceName(scope, resourceInfo.ResourceName)
             });
         }
 

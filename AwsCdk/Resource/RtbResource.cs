@@ -4,7 +4,7 @@ using Amazon.CDK.AWS.EC2;
 
 namespace AwsCdk.Resource
 {
-    internal class RtbResource : AbstractResource
+    internal class RtbResource
     {
         internal CfnRouteTable? PublicRtb { get; private set; }
         internal CfnRouteTable? App1aRtb { get; private set; }
@@ -181,7 +181,7 @@ namespace AwsCdk.Resource
                     Tags = new CfnTag[]{
                         new CfnTag{
                             Key= "Name",
-                            Value = CreateResourceName(scope, resourceInfo.ResourceName)
+                            Value = ResourceUtility.CreateResourceName(scope, resourceInfo.ResourceName)
                         }
                     }
                 });

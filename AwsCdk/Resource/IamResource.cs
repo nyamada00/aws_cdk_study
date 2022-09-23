@@ -5,7 +5,7 @@ using System;
 
 namespace AwsCdk.Resource
 {
-    internal class IamResource : AbstractResource
+    internal class IamResource
     {
         private record ResourceInfo(string Id, PolicyStatementProps PolicyStatementProps, string[] ManagedPolicyArns, string RoleName, Action<CfnRole> Assign);
 
@@ -91,7 +91,7 @@ namespace AwsCdk.Resource
             {
                 AssumeRolePolicyDocument = policyDocument,
                 ManagedPolicyArns = resourcesInfo.ManagedPolicyArns,
-                RoleName = CreateResourceName(scope, resourcesInfo.RoleName)
+                RoleName = ResourceUtility.CreateResourceName(scope, resourcesInfo.RoleName)
             });
         }
     }
